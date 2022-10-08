@@ -1,0 +1,22 @@
+# uses the docker-compose file version 3.8
+version: '3.8'
+services:
+  # defines the service named "db"
+  db:
+    # uses the official postgres image, alpine for smaller size, faster up
+    image: postgres:14.1-alpine
+    restart: always
+    # specify place to persist db data, volumn name is "db" 
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      # set the db name
+      POSTGRES_NAME: course_reviews_db 
+      # set the db password
+      POSTGRES_PASSWORD: admin
+      # set the db user
+      POSTGRES_USER: main_api_bot
+volumes:
+  # config for mounted volumn "db" above
+  db_data:
+    driver: local
