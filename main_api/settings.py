@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,15 +74,15 @@ WSGI_APPLICATION = "main_api.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# https://docs.docker.com/samples/django/#connect-the-database
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "course_reviews_db",
-        "USER": "main_api_bot",
-        "PASSWORD": "admin",
-        "HOST": "localhost",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": environ.get('POSTGRES_NAME'),
+        "USER": environ.get('POSTGRES_USER'),
+        "PASSWORD": environ.get('POSTGRES_PASSWORD'),
+        "HOST": "db",
         "PORT": "5432",
     }
 }
